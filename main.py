@@ -77,5 +77,6 @@ score_label.pack(pady=10)
 # Start the quiz
 display_question()
 
+ 
 # Run the Tkinter main loop
 app.mainloop()
