@@ -4,7 +4,9 @@ from tkinter import messagebox
 # Create the main application window
 app = tk.Tk()
 app.title("Plastic Pollution Quiz")
-app.geometry("300x200")
+#This is the size of the window that the game is played on
+app.geometry("400x200")
+#This is the background colour of the game
 app.configure(bg="blue")
 
 # Define the quiz questions and multiple-choice options
@@ -93,3 +95,6 @@ display_question()
  
 # Run the Tkinter main loop
 app.mainloop()
+
+
+
