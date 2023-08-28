@@ -4,7 +4,7 @@ from tkinter import messagebox
 # Create the main application window
 app = tk.Tk()
 app.title("Plastic Pollution Quiz")
-app.geometry("600x400")
+app.geometry("300x200")
 app.configure(bg="blue")
 
 # Define the quiz questions and multiple-choice options
@@ -24,7 +24,20 @@ questions = [
         "options": ["Fish", "Dolphins", "Sea turtles, seabirds, and marine mammals", "Sharks"],
         "correct": "Sea turtles, seabirds, and marine mammals"
     },
-    # Add more questions here...
+    # Add more questions here
+ {
+    "question": "Question 4: What is the long-term environmental impact of plastic pollution on marine ecosystems?",
+    "options": ["Habitat destruction, harm to marine life", "Global Warming", "World Hunger", "Earthquakes"],
+    "correct": "Habitat destruction, harm to marine life"
+},
+  {
+    "question":"What is the primary source of plastic pollution in our oceans?",
+    "options":["Industrial Waste", "Natural debris", "Household Garbage", "Space debris"],
+    "correct": "Household Garbage"
+
+  }
+  
+
 ]
 
 # Variables to track current question and score
