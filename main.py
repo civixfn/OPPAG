@@ -60,12 +60,14 @@ def display_question():
     question_label.config(text=question_data["question"])
 
     # Hide or show widgets based on question type
+  #This makes the multichoice question multi choice
     if "options" in question_data:
         for i, option_button in enumerate(option_buttons):
             option_button.config(text=question_data["options"][i])
             option_button.pack()
         typed_answer_entry.pack_forget()
-        typed_answer_button.pack_forget()
+        typed_answer_button.pack_forget
+      #This is what makes the text entry questions text entry
     elif "answer" in question_data:
         for option_button in option_buttons:
             option_button.pack_forget()
@@ -83,15 +85,27 @@ def check_answer(selected_option=None, typed_answer=None):
     if selected_option is not None:
         user_answer = question_data["options"][selected_option]
         correct_answer = question_data["correct"]
+      #This adds score and shows a message for correct answers
         if user_answer == correct_answer:
             score += 1
+            messagebox.showinfo("Result","Correct")
+        #This shows the message for incorrect answers  
+        else:
+          messagebox.showerror("Result",f"Incorrect the correct answer was {correct_answer}")
+            
     elif typed_answer is not None:
         correct_answer = question_data["answer"]
+      #This adds score and shows a message for correct answers
         if typed_answer.lower() == correct_answer.lower():
             score += 1
+            messagebox.showinfo("Result","Correct")
+        #This shows the message for incorrect answers  
+        else:
+          messagebox.showerror("Result",f"Incorrect the correct answer was {correct_answer}")
 
+  
     current_question += 1
-
+          
     if current_question < len(questions):
         display_question()
     else:
