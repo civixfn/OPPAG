@@ -12,14 +12,14 @@ app.configure(bg="blue")
 # Define the quiz questions and multiple-choice options
 questions = [
     {
-        "question": "Question 1: How long does it take for a plastic bottle to decompose in the ocean?",
-        "options": ["50 years", "100 years", "450 years", "1000 years"],
-        "correct": "450 years"
+        "question": "Question 1: What is the most common type of plastic found in the ocean?",
+        "options": ["polyethylene", "microplastics", "polypropylene", "polycarbonate"],
+        "correct": "polyethylene"
     },
     {
-        "question": "Question 2: What percentage of marine waste is estimated to be plastic?",
-        "options": ["10%", "50%", "80%", "100%"],
-        "correct": "80%"
+        "question": "Question 2: What is the term for the gradual breakdown of plastics into smaller particles?",
+        "options": ["plastic degradation", "plastic combustion", "plastic breakdown", "plastic destruction"],
+        "correct": "plastic degradation"
     },
     {
         "question": "Question 3: Which marine animals are particularly at risk due to plastic pollution?",
@@ -41,12 +41,12 @@ questions = [
 # Additional easy questions about plastic pollution in the ocean that answers will be typed
 questions += [
     {
-        "question": "Question 6: What is the most common type of plastic found in the ocean?",
-        "answer": "polyethylene"
+        "question": "Question 6: How many years does it take for a plastic bottle to decompose in the ocean?",
+        "answer": 450
     },
     {
-        "question": "Question 7: What is the term for the gradual breakdown of plastics into smaller particles?",
-        "answer": "plastic degradation"
+        "question": "Question 7: What percentage of marine waste is estimated to be plastic?",
+        "answer": 80
     }
 ]
 
@@ -60,14 +60,12 @@ def display_question():
     question_label.config(text=question_data["question"])
 
     # Hide or show widgets based on question type
-  #This makes the multichoice question multi choice
     if "options" in question_data:
         for i, option_button in enumerate(option_buttons):
             option_button.config(text=question_data["options"][i])
             option_button.pack()
         typed_answer_entry.pack_forget()
-        typed_answer_button.pack_forget
-      #This is what makes the text entry questions text entry
+        typed_answer_button.pack_forget()
     elif "answer" in question_data:
         for option_button in option_buttons:
             option_button.pack_forget()
@@ -78,6 +76,7 @@ def display_question():
     score_label.config(text=f"Score: {score}")
 
 # Function to check the answer and move to the next question
+
 def check_answer(selected_option=None, typed_answer=None):
     global current_question, score
     question_data = questions[current_question]
@@ -85,27 +84,30 @@ def check_answer(selected_option=None, typed_answer=None):
     if selected_option is not None:
         user_answer = question_data["options"][selected_option]
         correct_answer = question_data["correct"]
-      #This adds score and shows a message for correct answers
         if user_answer == correct_answer:
             score += 1
-            messagebox.showinfo("Result","Correct")
-        #This shows the message for incorrect answers  
+            messagebox.showinfo("Correct","You got the correct answer")
         else:
-          messagebox.showerror("Result",f"Incorrect the correct answer was {correct_answer}")
-            
+            messagebox.showerror("Incorrect", f"Incorrect answer the correct answer was: {correct_answer}")
     elif typed_answer is not None:
-        correct_answer = question_data["answer"]
-      #This adds score and shows a message for correct answers
-        if typed_answer.lower() == correct_answer.lower():
-            score += 1
-            messagebox.showinfo("Result","Correct")
-        #This shows the message for incorrect answers  
-        else:
-          messagebox.showerror("Result",f"Incorrect the correct answer was {correct_answer}")
+        try:
+          # This turns the string into a numeric value
+            typed_answer = int(typed_answer)
+          # This creates a boundary
+            if typed_answer >= 0:
+                correct_answer = question_data["answer"]
+                if typed_answer == correct_answer:
+                    score += 1
+                    messagebox.showinfo("Correct","You got the correct answer")
+                else:
+                    messagebox.showerror("Incorrect", f"Incorrect answer the correct answer was: {correct_answer}")
+            else:
+                messagebox.showerror("Invalid", "Please enter a positive number next time.")
+        except ValueError:
+            messagebox.showerror("Invalid", "Please enter a valid positive number next time.")
 
-  
     current_question += 1
-          
+
     if current_question < len(questions):
         display_question()
     else:
